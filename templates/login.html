@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block menu %}
+    <a class="button" href="/signup">Signup</a>
+{% endblock %}
+{% block content %}
+    <div class="square">
+        <h1>Welcome back!</h1>
+
+        <form method="POST" action="login">
+            <div class="form-line">
+                <label for="username">Username: </label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="form-line">
+                <label for="email">Email: </label>
+                <input type="text" id="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-line">
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-line">
+                <p>{{ warning }}</p>
+            </div>
+
+            <div class="form-line" style="justify-content: flex-end">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+{% endblock %}

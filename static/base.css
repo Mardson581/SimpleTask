@@ -1,0 +1,175 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: Roboto;
+    src: url("fonts/Roboto-Regular.ttf")
+}
+
+@font-face {
+    font-family: IstokWeb;
+    src: url("fonts/IstokWeb-Regular.ttf");
+}
+
+@font-face {
+    font-family: IstokWeb-Bold;
+    src: url("fonts/IstokWeb-Bold.ttf");
+}
+
+:root {
+    --blue: #264B80;
+    --light-blue: #CCE1FF;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    color: var(--blue);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 3px var(--blue);
+    width: 65%;
+    height: fit-content;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: .5s;
+    animation: forwards 1s right-fade;
+}
+
+#logo img {
+    height: 35px;
+}
+
+#logo p {
+    font-family: IstokWeb-Bold, sans-serif;
+    color: var(--blue);
+    font-size: 30px;
+}
+
+.button {
+    background-color: var(--blue);
+    color: white;
+    border-radius: 32px;
+    border: none;
+    padding: 10px 35px;
+    text-decoration: none;
+    font-family: IstokWeb-Bold, sans-serif;
+    font-size: 20px;
+    transition: .5s;
+    animation: forwards 1s left-fade;
+}
+
+.button:hover {
+    border: solid 3px var(--blue);
+    background-color: var(--light-blue);
+    color: var(--blue);
+}
+
+h1 {
+    font-family: IstokWeb-Bold, sans-serif;
+    color: var(--blue);
+    font-size: 35px;
+}
+
+label {
+    font-family: IstokWeb, sans-serif;
+    color: var(--blue);
+    font-size: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+input {
+    background-color: var(--light-blue);
+    color: var(--blue);
+    border-radius: 16px;
+    border: solid 2px var(--blue);
+    padding: 10px;
+    width: 40vw;
+}
+
+input[type="submit"] {
+    background-color: var(--blue);
+    color: white;
+    border-radius: 32px;
+    width: 150px;
+    font-size: 16px;
+    transition: .5s;
+    border: solid 3px var(--blue);
+}
+
+input[type="submit"]:hover {
+    background-color: var(--light-blue);
+    color: var(--blue);
+}
+
+.square {
+    border: solid 4px var(--blue);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+footer {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: IstokWeb, sans-serif;
+    box-sizing: border-box;
+    border-top: solid 3px var(--blue);
+}
+
+@keyframes right-fade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes left-fade {
+    0% {
+        opacity: 0;
+        transform: translate(50%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
