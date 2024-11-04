@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+    Login - SimpleTask
+{% endblock %}
 {% block menu %}
     <a class="button" href="/signup">Signup</a>
 {% endblock %}
@@ -6,7 +9,7 @@
     <div class="square">
         <h1>Welcome back!</h1>
 
-        <form method="POST" action="login">
+        <form method="POST" action="/login">
             <div class="form-line">
                 <label for="username">Username: </label>
                 <input type="text" id="username" name="username" placeholder="Username" required>
@@ -19,7 +22,7 @@
 
             {% if warning %}
                 <div class="form-line" style="justify-content: flex-start">
-                    <img src="static/warning.png" alt="Warning: " style="height: 24px; width: 24px">
+                    <img src="static/images/warning.png" alt="Warning: " style="height: 24px; width: 24px">
                     <p style="font-family: IstokWeb, sans-serif; font-size: 17px">{{ warning }}!</p>
                 </div>
             {% endif %}

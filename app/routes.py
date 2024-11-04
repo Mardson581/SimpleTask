@@ -1,4 +1,3 @@
-from http.client import responses
 from sqlite3 import OperationalError
 
 from flask import make_response, request, render_template, redirect
@@ -66,6 +65,7 @@ def signup_page():
     except OperationalError as e:
         return render_template("signup.html", warning="An internal error was occurred. Try again later")
 
+
 @app.route("/logout")
 def logout():
     session_id = request.cookies["session_id"]
@@ -74,6 +74,7 @@ def logout():
     response = make_response(redirect("/"))
     response.set_cookie("session_id", "", httponly=True, samesite="Strict")
     return response
+
 
 @app.route("/home")
 def home_page():

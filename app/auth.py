@@ -46,7 +46,6 @@ def authenticate_user(user: User) -> str:
 
 
 def login_user(user: User) -> str:
-    validate.validate_password(user.password)
     session_dao = SessionDAO()
     session_dao.connect()
 
@@ -61,7 +60,7 @@ def login_user(user: User) -> str:
     user_dao.close()
 
     if not user:
-        raise ValueError("User or passwords are incorrect!")
+        raise ValueError("User or password are incorrect!")
     session_id = session_dao.create_session(user)
     session_dao.close()
 

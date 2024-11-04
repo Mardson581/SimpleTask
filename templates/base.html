@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - SimpleTask</title>
-    <link rel="stylesheet" type="text/css" href="static/base.css">
-    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <title>
+        {% block title %}
+            Base - SimpleTask
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="static/css/base.css">
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
 </head>
 <body>
     <header>
         <div id="logo">
-            <img src="static/logo.png" alt="Logo">
+            <img src="static/images/logo.png" alt="Logo">
             <p>SimpleTask</p>
         </div>
         {% block menu %}
