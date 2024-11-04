@@ -1,16 +1,23 @@
 from enum import Enum
 
+
 class User:
 
-    def __init__(self, username: str, email: str, password: str, tasks: list=list) -> None:
-        assert len(username) > 0, "The username length must be greater than zero"
-        assert len(email) > 0, "The email length must be greater than zero"
-        assert len(password) > 0, "The password can't be none"
+    def __init__(self, username: str, password: str, user_id: int = -1, email: str = "", tasks: list = list) -> None:
+        if not len(username) > 0:
+            raise ValueError("The username length must be greater than zero")
+        if not len(password) > 0:
+            raise ValueError("The password can't be none")
 
+        self.__id = user_id
         self.__username = username
         self.__email = email
         self.__password = password
         self.__tasks = tasks
+
+    @property
+    def id(self) -> int:
+        return self.__id
 
     @property
     def username(self) -> str:
@@ -28,38 +35,45 @@ class User:
     def tasks(self) -> list:
         return self.__tasks
 
+    @id.setter
+    def id(self, id: int):
+        self.__id = id
+
     @username.setter
-    def username(self, username):
-        assert len(username) > 0, "The username length must be greater than 0"
+    def username(self, username: str):
+        if not len(username) > 0:
+            raise ValueError("The username length must be greater than zero")
         self.__username = username
 
     @email.setter
-    def email(self, email):
-        assert len(email) > 0, "The email length must be greater than 0"
+    def email(self, email: str):
         self.__email = email
 
     @password.setter
     def password(self, password: str):
-        assert len(password) > 0, "The password cannot be none"
+        if not len(password) > 0:
+            raise ValueError("The password cannot be none")
         self.__password = password
 
     @tasks.setter
-    def tasks(self, tasks:list):
+    def tasks(self, tasks: list):
         self.__tasks = tasks
-
 
     def __repr__(self):
         return f"User(username='{self.__username}', email='{self.__email}', tasks={self.__tasks})"
+
 
 class TaskStatus(Enum):
     DONE = "done"
     IN_PROGRESS = "in-progress"
     TODO = "todo"
 
+
 class Task:
 
-    def __init__(self, name: str, description: str="", status: TaskStatus=TaskStatus.TODO):
-        assert len(name) > 0, "The task name length must to be greater than zero"
+    def __init__(self, name: str, description: str = "", status: TaskStatus = TaskStatus.TODO):
+        if not len(name) > 0:
+            raise ValueError("The task name length must to be greater than zero")
 
         self.__name = name
         self.__description = description
@@ -79,7 +93,8 @@ class Task:
 
     @name.setter
     def name(self, name: str):
-        assert len(name) > 0, "The task name length must to be greater than zero"
+        if not len(name) > 0:
+            raise ValueError("The task name length must to be greater than zero")
         self.__name = name
 
     @description.setter

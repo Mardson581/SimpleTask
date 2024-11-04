@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block menu %}
-    <a class="button" href="/signup">Signup</a>
+    <a class="button" href="/login">Login</a>
 {% endblock %}
 {% block content %}
     <div class="square">
-        <h1>Welcome back!</h1>
+        <h1>A productive day awaits you</h1>
 
-        <form method="POST" action="login">
+        <form method="POST" action="signup">
             <div class="form-line">
                 <label for="username">Username: </label>
                 <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="form-line">
+                <label for="email">Email: </label>
+                <input type="text" id="email" name="email" placeholder="Email" required>
             </div>
 
             <div class="form-line">
@@ -25,7 +30,7 @@
             {% endif %}
 
             <div class="form-line" style="justify-content: flex-end; align-items: center">
-                <input type="submit" value="Login">
+                <input type="submit" value="Signup">
             </div>
         </form>
     </div>
