@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <title>
         {% block title %}
             Base - SimpleTask
         {% endblock %}
     </title>
-    <link rel="stylesheet" type="text/css" href="static/css/base.css">
-    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/base.css") }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for("static", filename="images/favicon.ico") }}">
 </head>
 <body>
     <header>
-        <div id="logo">
-            <img src="static/images/logo.png" alt="Logo">
-            <p>SimpleTask</p>
-        </div>
+        <a href="/home" style="text-decoration: none;">
+            <div id="logo">
+                <img src="{{ url_for("static", filename="images/logo.png") }}" alt="Logo">
+                <p>SimpleTask</p>
+            </div>
+        </a>
         {% block menu %}
         {% endblock %}
     </header>

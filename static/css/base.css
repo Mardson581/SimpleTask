@@ -24,7 +24,7 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -35,6 +35,8 @@ body {
     justify-content: space-between;
     flex-direction: column;
     color: var(--blue);
+    gap: 30px;
+    flex-shrink: 2;
 }
 
 header {
@@ -69,7 +71,7 @@ header {
     background-color: var(--blue);
     color: white;
     border-radius: 32px;
-    border: none;
+    border: solid 3px var(--blue);
     padding: 10px 35px;
     text-decoration: none;
     font-family: IstokWeb-Bold, sans-serif;
@@ -79,7 +81,6 @@ header {
 }
 
 .button:hover {
-    border: solid 3px var(--blue);
     background-color: var(--light-blue);
     color: var(--blue);
 }
@@ -88,6 +89,12 @@ h1 {
     font-family: IstokWeb-Bold, sans-serif;
     color: var(--blue);
     font-size: 35px;
+}
+
+h3 {
+    font-family: IstokWeb, sans-serif;
+    color: var(--blue);
+    font-size: 20px;
 }
 
 label {
@@ -109,7 +116,14 @@ form {
     gap: 10px;
 }
 
-input {
+.form-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
     background-color: var(--light-blue);
     color: var(--blue);
     border-radius: 16px;
@@ -137,6 +151,24 @@ input[type="submit"]:hover {
     border: solid 4px var(--blue);
     border-radius: 16px;
     padding: 20px;
+    background-color: var(--light-blue);
+}
+
+#panel, #update-panel {
+    position: absolute;
+    z-index: 5;
+    top: -150%;
+    left: -150%;
+    transform: translate(-50%, -50%);
+}
+
+#warning {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
 }
 
 footer {
@@ -148,6 +180,82 @@ footer {
     font-family: IstokWeb, sans-serif;
     box-sizing: border-box;
     border-top: solid 3px var(--blue);
+}
+
+main {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 60vw;
+}
+
+.task-square {
+    border: solid 2px var(--blue);
+    padding: 20px;
+    background-color: var(--light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 20px;
+    color: var(--blue);
+    font-family: IstokWeb, serif;
+    transition: .5s;
+    box-sizing: border-box;
+}
+
+.task-square:hover {
+    cursor: pointer;
+    background-color: var(--blue);
+    color: var(--light-blue) !important;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.section-title {
+    width: 100%;
+    border-bottom: solid 3px var(--blue);
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#current-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60vw;
+    margin-bottom: 20px;
+    min-height: 30vh;
+    gap: 30px;
+}
+
+#current-task-section {
+    border: solid 2px var(--blue);
+    background-color: var(--light-blue);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 16px;
+}
+
+#current-task-section p {
+    font-family: IstokWeb, serif;
+    font-size: 20px;
 }
 
 @keyframes right-fade {

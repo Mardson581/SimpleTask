@@ -71,13 +71,23 @@ class TaskStatus(Enum):
 
 class Task:
 
-    def __init__(self, name: str, description: str = "", status: TaskStatus = TaskStatus.TODO):
+    def __init__(self, user_id: int, name: str, description: str = "", status: TaskStatus = TaskStatus.TODO, task_id: int = 0):
         if not len(name) > 0:
             raise ValueError("The task name length must to be greater than zero")
 
+        self.__user_id = user_id
         self.__name = name
         self.__description = description
         self.__status = status
+        self.__task_id = task_id
+
+    @property
+    def task_id(self) -> int:
+        return self.__task_id
+
+    @property
+    def user_id(self) -> int:
+        return self.__user_id
 
     @property
     def name(self) -> str:
@@ -90,6 +100,10 @@ class Task:
     @property
     def status(self) -> TaskStatus:
         return self.__status
+
+    @user_id.setter
+    def user_id(self, user_id: int):
+        self.__user_id = user_id
 
     @name.setter
     def name(self, name: str):
@@ -104,3 +118,7 @@ class Task:
     @status.setter
     def status(self, status: TaskStatus):
         self.__status = status
+
+    @task_id.setter
+    def task_id(self, task_id: int):
+        self.__task_id = task_id

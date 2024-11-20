@@ -3,16 +3,161 @@
     Home - SimpleTask
 {% endblock %}
 {% block menu %}
-    <a class="button">Add Task</a>
+    <a class="button" id="add-btn">Add Task</a>
 {% endblock %}
 {% block content %}
-    <h1>Hello, {{ session_id }}!</h1>
+    <section id="current-task">
+        <h3 style="font-size: 25px; margin: 0;">Working on:</h3>
+
+        <div id="current-task-section" style="width: 100%">
+            {% if current_task %}
+                <h1>{{ current_task.name }}</h1>
+                <p>{{ current_task.description }}</p>
+            {% else %}
+                <p>Yep! No tasks today :-)</p>
+            {% endif %}
+        </div>
+
+        <form action="/mark-done/{{ current_task.task_id }}" method="POST">
+            {% if current_task %}
+                <input type="submit" class="button"
+                       style="width: 100%; font-family: IstokWeb, sans-serif; font-size: 20px" value="Mark done">
+            {% else %}
+                <div class="button"
+                     style="width: 60%; font-family: IstokWeb, sans-serif; font-size: 20px; text-align: center">Mark
+                    done
+                </div>
+            {% endif %}
+        </form>
+    </section>
+
+    <section class="tasks">
+        <h3 class="section-title">Tasks</h3>
+        {% for task in tasks %}
+            <div class="task-square"
+                 onclick="displayTaskInfo({{ task.task_id }}, '{{ task.name }}', '{{ task.description }}', '{{ task.status.value }}')"
+            >
+                {% if task.status.value == "done" %}
+                    <s>{{ task.name }}</s>
+                {% else %}
+                    {{ task.name }} - {{ task.status.value.upper() }}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+
+    <div class="square" id="panel">
+        <div class="form-line" style="width: 100%">
+            <h1>Create task</h1>
+            <img src="{{ url_for("static", filename="images/close.png") }}" alt="" id="close-button">
+        </div>
+
+        <form action="/add-task" method="POST">
+            <div class="form-line">
+                <label for="task_name">Task name: </label>
+                <input type="text" name="task_name" id="task_name" required>
+            </div>
+
+            <div class="form-line">
+                <label for="task_description">Description: </label>
+                <input type="text" name="task_description" id="task_description" required>
+            </div>
+
+            <div class="form-line" style="justify-content: flex-start; gap: 20px">
+                <label for="">Task Status: </label>
+
+                <div class="form-box">
+                    <input type="radio" name="task_status" id="todo" value="todo">
+                    <label for="todo">To Do</label>
+                </div>
+
+                <div class="form-box">
+                    <input type="radio" name="task_status" id="in-progress" value="in-progress">
+                    <label for="in-progress">In progress</label>
+                </div>
+
+                <div class="form-box">
+                    <input type="radio" name="task_status" id="done" value="done">
+                    <label for="done">Done</label>
+                </div>
+            </div>
+
+            <div class="form-line">
+                <input type="submit" value="Create">
+            </div>
+        </form>
+    </div>
+
+    <div class="square" id="update-panel">
+        <div class="form-line" style="width: 100%">
+            <h1>Edit task</h1>
+            <img src="{{ url_for("static", filename="images/close.png") }}" alt="" id="close-update-button">
+        </div>
+
+        <form action="/update" method="POST" id="update-form">
+            <div class="form-line">
+                <label for="task_name">Task name: </label>
+                <input type="text" name="update_task_name" id="update_task_name" required>
+            </div>
+
+            <div class="form-line">
+                <label for="task_description">Description: </label>
+                <input type="text" name="update_task_description" id="update_task_description" required>
+            </div>
+
+            <div class="form-line" style="justify-content: flex-start; gap: 20px">
+                <label for="">Task Status: </label>
+
+                <div class="form-box">
+                    <input type="radio" name="task_status" id="update_todo" value="todo">
+                    <label for="update_todo">To Do</label>
+                </div>
+
+                <div class="form-box">
+                    <input type="radio" name="task_status" id="update_in-progress" value="in-progress">
+                    <label for="update_in-progress">In progress</label>
+                </div>
+
+                <div class="form-box">
+                    <input type="radio" name="task_status" id="update_done" value="done">
+                    <label for="update_done">Done</label>
+                </div>
+            </div>
+
+            <input type="hidden" id="update_task_id" name="update_task_id" value="">
+
+            <div class="form-line">
+                <input type="submit" value="Update task">
+                <input type="submit" id="update-btn" value="Delete task">
+            </div>
+        </form>
+    </div>
+
+    {% if warning %}
+        <div class="square" id="warning">
+            <div class="form-line" style="width: 100%">
+                <h1>Message</h1>
+                <img src="{{ url_for("static", filename="images/close.png") }}" alt="" id="close-warning">
+            </div>
+            <label>{{ warning }}</label>
+        </div>
+
+        <script>
+            let closeWarning = document.querySelector("#close-warning");
+
+            closeWarning.addEventListener("click", () => {
+                warningPanel.style.left = "-50%";
+                warningPanel.style.top = "-50%";
+                warningPanel.style.visibility = "hidden";
+            });
+        </script>
+    {% endif %}
+
+    <script src="{{ url_for("static", filename="js/main.js") }}"></script>
 {% endblock %}
 {% block footer %}
-    <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; height: 100%">
-        <p style="width: 50%">Developed by Mardson Diego</p>
-        <a href="/logout">
-            <img style="height: 50px; width: 50px" src="static/images/logoff.png" alt="Logout">
-        </a>
-    </div>
+    <p style="width: 50%">Developed by Mardson Diego</p>
+    <a href="/logout">
+        <img style="height: 50px; width: 50px" src="{{ url_for("static", filename="images/logoff.png") }}" alt="Logout">
+    </a>
 {% endblock %}
