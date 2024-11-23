@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}
+	{{ title }}
+{% endblock %}
+{% block menu %}
+	<div class="form-line">
+        <a class="button" href="/login" style="background-color: var(--light-blue); color: var(--blue)">Login</a>
+        <a class="button" href="/signup">Signup</a>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="form-line" id="index-content">
+        <h1>
+            Let's focus on what really<br>
+            <span>MATTERS</span>
+            <p>SimpleTask is a tasklist manager application designed to help users efficiently organize and manage their tasks</p>
+        </h1>
+        <img id="index-image" src="{{ url_for("static", filename="images/background.png") }}" alt="SimpleTask">
+    </div>
+{% endblock %}

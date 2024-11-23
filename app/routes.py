@@ -1,7 +1,7 @@
 import uuid
 from sqlite3 import OperationalError
 
-from flask import make_response, request, render_template, redirect
+from flask import make_response, request, render_template, redirect, url_for
 from werkzeug.exceptions import BadRequestKeyError
 
 from app import app
@@ -13,8 +13,13 @@ from app.tasks import list_tasks, update_task_status, get_user_session, delete_t
 
 @app.route('/')
 def index_page():
-    data = uuid.uuid4()
-    response = make_response(f"<h1>Some random data here: {data}</h1>")
+    response = make_response(render_template("index.html"))
+    try:
+        session_id = request.cookies["session_id"]
+        if is_authenticated(session_id):
+            return make_response(redirect("/home"))
+    except BadRequestKeyError:
+        response.set_cookie("session_id", "", httponly=True, samesite="Strict")
     return response
 
 
@@ -170,7 +175,7 @@ def mark_done(task_id: int):
     if update_task_status(task_id, TaskStatus.DONE, user.id):
         return make_response(redirect("/home"))
     else:
-        return home_page(warning="An error was occurred while trying to update the task!"), 401
+        return url_for("home", warning="An error was occurred while trying to update the task!"), 401
 
 
 @app.route("/delete/<int:task_id>", methods=["POST"])
@@ -192,7 +197,7 @@ def delete_task(task_id: int):
     if delete_task_by_id(task_id, user.id):
         return make_response(redirect("/home"))
     else:
-        return home_page(warning="An error was occurred while trying to delete the task!"), 401
+        return url_for("home", warning="An error was occurred while trying to delete the task!"), 401
 
 
 @app.route("/update", methods=["POST"])

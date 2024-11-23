@@ -48,6 +48,32 @@ header {
     height: fit-content;
 }
 
+#index-content {
+    width: 65vw;
+    height: 50vh;
+}
+
+#index-content h1 {
+    font-size: 40px;
+    width: 50%;
+}
+
+#index-content p {
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 20px;
+    width: 100%;
+}
+
+#index-content h1 span {
+    font-size: 70px;
+}
+
+#index-image {
+    width: 45vw;
+    max-width: 500px;
+}
+
 #logo {
     display: flex;
     align-items: center;
